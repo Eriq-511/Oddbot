@@ -180,8 +180,15 @@ const RESPONSES = {
   },
 
   scoping_followup: {
-    message: `Good — starting to take shape. A couple more things help me build a complete brief: what's the rough timeline you're working toward, and is there a budget range in mind?`,
+    message: `Good — starting to take shape. Three quick things to complete the brief: what's your name, what's the rough timeline you're working toward, and is there a budget range in mind?`,
     quick_replies: ['Need it in 3 months', 'Flexible on timing', 'Under $20k', 'Not sure on budget yet'],
+    stage: 'scoping',
+    action: null,
+  },
+
+  nameAsk: {
+    message: `Almost there — one thing missing from the brief: what's your name? Then I'll pull everything together and get it over to the team.`,
+    quick_replies: [],
     stage: 'scoping',
     action: null,
   },
@@ -579,7 +586,13 @@ export function getBotResponse(userText, currentStage, currentBrief, messageCoun
         response = RESPONSES.timeline_got
       }
     } else if (currentBrief.project_type && currentBrief.timeline && currentBrief.budget_range) {
-      response = RESPONSES.push_to_email
+      // All core fields filled — ask for name if missing, then push to email
+      const mergedBrief = { ...currentBrief, ...briefUpdate }
+      if (!mergedBrief.name) {
+        response = RESPONSES.nameAsk
+      } else {
+        response = RESPONSES.push_to_email
+      }
     } else {
       response = RESPONSES.generic_scoping
     }
@@ -600,6 +613,17 @@ export function getBotResponse(userText, currentStage, currentBrief, messageCoun
       complete:      RESPONSES.cta_end,
     }
     response = stageDefaults[currentStage] || RESPONSES.generic_discovery
+  }
+
+  // ── Auto-capture description from substantial scoping messages ──────────
+  if (
+    (currentStage === 'scoping' || currentStage === 'discovery') &&
+    userText.trim().length > 50 &&
+    !currentBrief.description &&
+    !briefUpdate.description
+  ) {
+    const raw = userText.trim()
+    briefUpdate.description = raw.length > 90 ? raw.slice(0, 90) + '\u2026' : raw
   }
 
   return {
