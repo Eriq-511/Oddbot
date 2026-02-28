@@ -3,7 +3,7 @@
  * No backend required. All conversation logic runs in the browser.
  */
 import { useState, useCallback, useRef } from 'react'
-import { getBotResponse, getGreeting } from '../engine'
+import { getBotResponse, getGreeting, extractBriefUpdates } from '../engine'
 
 const STAGES = {
   IDLE: 'idle',
@@ -41,6 +41,7 @@ export function useChat() {
   const initCalledRef = useRef(false)
   const stageRef = useRef(STAGES.IDLE)
   const briefRef = useRef({})
+  const messagesRef = useRef([])  // kept in sync for API calls
 
   // Keep refs in sync so callbacks always see latest values
   const updateStage = (s) => { stageRef.current = s; setStage(s) }
@@ -51,7 +52,9 @@ export function useChat() {
 
   const appendMessage = useCallback((role, content) => {
     messageCountRef.current += 1
-    setMessages(prev => [...prev, { id: makeId(), role, content, timestamp: Date.now() }])
+    const msg = { id: makeId(), role, content, timestamp: Date.now() }
+    messagesRef.current = [...messagesRef.current, msg]
+    setMessages(prev => [...prev, msg])
   }, [])
 
   const applyResponse = useCallback((resp) => {
@@ -101,15 +104,36 @@ export function useChat() {
     appendMessage('user', text.trim())
     setIsTyping(true)
 
-    // Get response from client-side engine
-    const resp = getBotResponse(
-      text.trim(),
-      stageRef.current,
-      briefRef.current,
-      messageCountRef.current,
-    )
+    let resp
+    try {
+      const apiRes = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: messagesRef.current.map(m => ({ role: m.role, content: m.content })),
+          brief: briefRef.current,
+          stage: stageRef.current,
+        }),
+      })
 
-    await new Promise(r => setTimeout(r, typingDelay(resp.message)))
+      if (!apiRes.ok) throw new Error(`API ${apiRes.status}`)
+      resp = await apiRes.json()
+
+      // Merge any local regex-extracted brief fields (belt-and-suspenders)
+      const localUpdates = extractBriefUpdates(text.trim())
+      resp.brief_update = { ...localUpdates, ...(resp.brief_update || {}) }
+    } catch (err) {
+      console.warn('OddBot AI unavailable, using local engine:', err.message)
+      resp = getBotResponse(
+        text.trim(),
+        stageRef.current,
+        briefRef.current,
+        messageCountRef.current,
+      )
+    }
+
+    // Ensure a minimum "thinking" delay so the typing indicator feels natural
+    await new Promise(r => setTimeout(r, resp._skipDelay ? 0 : Math.max(600, Math.min(resp.message.length * 12, 2400))))
 
     applyResponse(resp)
     setIsTyping(false)
@@ -157,6 +181,7 @@ export function useChat() {
     messageCountRef.current = 0
     stageRef.current = STAGES.IDLE
     briefRef.current = {}
+    messagesRef.current = []
     setMessages([])
     setIsTyping(false)
     setQuickReplies([])
