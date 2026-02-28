@@ -94,47 +94,52 @@ const isDatabase     = (t) => kw(t, 'database', 'data', 'postgres', 'mysql', 'mo
 const isTesting      = (t) => kw(t, 'test', 'testing', 'qa', 'quality assurance', 'bug', 'unit test', 'e2e', 'end to end', 'automated test', 'coverage')
 const isSmallProject = (t) => kw(t, 'small', 'simple', 'quick', 'just a', 'only need', 'landing page', 'basic', 'just need', 'something small', 'minor', 'small project', 'little project')
 const isGetStarted   = (t) => kw(t, 'get started', 'start a project', 'kick off', 'begin', 'next steps', 'how do i start', 'what do i do next', 'where do i begin', 'sign up', 'onboard')
+const isGenesis      = (t) => kw(t, 'genesis', '5 day', '5-day', 'five day', 'fast mvp', 'quick mvp', 'single feature', 'pre-revenue', 'pre revenue', 'launch friday')
+const isKingdom      = (t) => kw(t, 'kingdom builder', 'kingdom build', '14 day', '14-day', 'fourteen day', 'fractional cto', 'complete product', 'full product', 'scale', 'scaling')
+const isGiveHim50    = (t) => kw(t, 'give him 50', 'give him fifty', 'kingdom work', '50%', 'mission', 'charity', 'donate', 'profits', 'church', 'missionary', 'faith', 'christian', 'god', 'jesus', 'kingdom', 'calling', 'ministry', 'pray', 'worship')
+const isBillyPods    = (t) => kw(t, 'billy pod', 'billy pods', 'intern', 'pod', 'team extension', 'coordinator')
+const isPlanner      = (t) => kw(t, 'planner', 'project planner', 'proposal', 'get a quote', 'get started', 'start now', 'apply')
 
 // ─── Response bank ───────────────────────────────────────────────────────────
 
 const RESPONSES = {
   greeting: {
-    message: `Custom software. Built weird — in the best way.\n\nI'm OddBot, your direct line to the Odd Shoes team. We build bespoke digital products for clients — web apps, SaaS platforms, AI-powered tools, internal dashboards, e-commerce systems. Whatever the problem is, we build the exact right solution for it.\n\nWhat are you trying to build?`,
-    quick_replies: ['I have a project idea', 'What do you build?', 'How does pricing work?', 'What\'s your tech stack?'],
+    message: `A higher calling. A better startup.\n\nI'm OddBot — built by the Odd Shoes team in Kampala, Uganda. We build production-grade apps for Christian founders who believe business can be a vehicle for Kingdom impact. 100+ MVPs shipped. 5–14 days to launch. 50% of our profits go to Kingdom work.\n\nWhat are you looking to build?`,
+    quick_replies: ['Tell me about your services', 'I have a project idea', 'How does pricing work?', 'What is Give Him 50?'],
     stage: 'discovery',
     action: null,
   },
 
   offTopic: {
-    message: `That's outside our lane — but I'm not going anywhere.\n\nIf there's something you want to build, something you're trying to solve, or a project that's been sitting in your head too long — I'm all ears.`,
-    quick_replies: ['I have a project idea', 'What does Odd Shoes build?', 'How does pricing work?'],
+    message: `That's outside my lane — but I'm not going anywhere.\n\nIf you've got a startup idea, a product to build, or a problem to solve, the Odd Shoes team is ready. What are you working on?`,
+    quick_replies: ['I have a project idea', 'Tell me about Odd Shoes', 'How does pricing work?'],
     stage: 'discovery',
     action: null,
   },
 
   about: {
-    message: `Odd Shoes is a custom software development studio. We build things from scratch — the right way, for the specific problem.\n\nSmall senior team. Direct communication. No templates, no cookie-cutter anything. Every project is designed and built start to finish for the client it's for.\n\nServices span the full stack: web apps, SaaS products, AI integrations, e-commerce, internal tools, APIs — and the design that wraps it all together.\n\nWhat's the problem you're trying to solve?`,
-    quick_replies: ['I need a web app built', 'I want AI features added', 'What does a project cost?', 'How does the process work?'],
+    message: `Odd Shoes is a faith-driven startup studio based in Kampala, Uganda.\n\nWe were built for one kind of founder: Christian entrepreneurs with God-given ideas who can't find developers that understand their mission — or can't afford the big agencies.\n\nSmall, senior team. Worshippers and musicians who happen to be engineers. Every sprint starts with prayer. Every product is built to serve.\n\nThe Give Him 50 model: 50% of every project's profit goes to Kingdom work — missionaries, church plants, and ministry across East Africa. We don't do this because we have to. We do it because we get to.\n\nContact: buildit@oddshoes.dev or book a call at calendly.com/builtbyoddshoes\n\nWhat's the idea you're sitting on?`,
+    quick_replies: ['See your services', 'View past work', 'What is Give Him 50?', 'I have a project'],
     stage: 'discovery',
     action: null,
   },
 
   price: {
-    message: `We don't do hourly rates or pre-packaged tiers. Every project is scoped custom — because every problem is different.\n\nProjected ranges depend entirely on complexity and scope. Simple web apps start around $10–15k. SaaS platforms and AI integrations typically run $25–75k+. We'll give you an honest number after a 20-minute discovery call.\n\nWant to lock in a time?`,
-    quick_replies: ['Yes, let\'s talk', 'Tell me more first', 'What\'s included?'],
+    message: `Pricing is scoped per project and discussed in the Project Planner — never a surprise.\n\nThe two main packages:\n\n• **Genesis Build** — 5-day MVP. Single core feature, production-ready, launched Friday. Built for pre-revenue founders with a clear idea. Budget-accessible by design.\n• **Kingdom Builder** — 14-day complete product + 6 months fractional CTO support. Multi-feature app, full brand, AI automation included. Limited to 3 projects/month.\n\nAI & Automation is available as a standalone add-on at various levels.\n\nStart the Project Planner to share your vision and budget — the team will work with you from there.`,
+    quick_replies: ['Launch Project Planner', 'Tell me about Genesis Build', 'Tell me about Kingdom Builder', 'Book a call'],
     stage: 'email_capture',
     action: 'request_email',
   },
 
   process: {
-    message: `Clean and direct:\n\n1. Discovery call — understand the problem deeply\n2. Proposal & scope — what we're building and how much\n3. Design sprint — wireframes, flows, visual direction\n4. Build sprints — iterative development with regular check-ins\n5. Testing & QA — we break it before you do\n6. Launch — with full handoff and documentation\n7. Support — we don't disappear after shipping\n\nTypical timeline: 4–16 weeks depending on scope. We move fast, but we don't rush quality.\n\nWhat are you looking to build?`,
-    quick_replies: ['I need something built fast', 'What\'s the average timeline?', 'Can we start soon?'],
+    message: `Two tracks depending on your stage:\n\n**Genesis Build (5 days):**\n1. Day 1 — Vision Lock: 2hr strategy call, scope locked, no feature creep\n2. Days 2–4 — Build: single feature + auth + database + React UI\n3. Day 5 — Launch: deployed to production, landing page, team walkthrough\n\n**Kingdom Builder (14 days + 6 months):**\n1. Days 1–3 — Brand & Strategy: full identity, user research, architecture\n2. Days 4–12 — Build: multi-feature app, Stripe/M-Pesa, AI automation, admin dashboard\n3. Days 13–14 — Polish & Deploy: QA, performance, production, training\n4. Months 1–6 — Fractional CTO: strategy calls, bug fixes, design hours, roadmap\n\nBoth include 30-day bug fixes post-launch.\n\nWhich stage are you at — pre-revenue with one idea, or ready to scale?`,
+    quick_replies: ['Pre-revenue — one idea', 'Ready to scale', 'I need AI automation', 'Start the planner'],
     stage: 'scoping',
     action: null,
   },
 
   work: {
-    message: `Head to oddshoes.dev — the work speaks louder than I can.\n\nWe've shipped: SaaS platforms, AI-powered tools, custom e-commerce systems, internal dashboards, complex APIs, and a few things still under NDA.\n\nEach project gets built from scratch — no templates, no shortcuts. What's the project you have in mind?`,
+    message: `We've shipped 100+ MVPs and 15+ products live — including:\n\nNextGenHims, DaVinci Analytics, Lightbeam Media, DevFest QA, BlueOx Business, HeadshotCam, PicFlair, InstantUGC, Glo SACCO — and many more under NDA.\n\nOne client secured a $250K seed round in 2023. Multiple clients have since received VC funding.\n\nSee the full portfolio: oddshoes.dev/work\n\nWhat kind of product are you looking to build?`,
     quick_replies: ['I need something similar', 'I have a new idea', 'How long do projects take?'],
     stage: 'discovery',
     action: 'show_cta',
@@ -173,8 +178,8 @@ const RESPONSES = {
   },
 
   contact: {
-    message: `Reach the team directly at hello@oddshoes.dev — or drop your email here and we'll come to you.\n\nEither way, someone responds within 24 hours. No bots on the other end.`,
-    quick_replies: ['Drop my email here', 'I\'ll email directly'],
+    message: `You can reach the team directly at:\n\n• **Email:** buildit@oddshoes.dev\n• **WhatsApp:** +31 97 010 209 759 — wa.me/3197010209759\n• **Book a call:** calendly.com/builtbyoddshoes\n• **Project Planner:** oddshoes.dev/planner\n\nOr drop your email here and we'll come to you. Someone responds within 24 hours.`,
+    quick_replies: ['Drop my email here', 'Launch the Project Planner', 'Book a call on Calendly'],
     stage: 'email_capture',
     action: 'request_email',
   },
@@ -236,15 +241,15 @@ const RESPONSES = {
   },
 
   cta_end: {
-    message: `You're in. Someone from Odd Shoes will be in touch within 24 hours to set up a discovery call.\n\nIn the meantime — see the kind of work we ship at oddshoes.dev.`,
-    quick_replies: ['Visit oddshoes.dev', 'What happens in the discovery call?'],
+    message: `You're in. Someone from the Odd Shoes team will be in touch within 24 hours.\n\nIn the meantime — explore the portfolio at oddshoes.dev/work, or book a call directly at calendly.com/builtbyoddshoes.\n\nBuilt with prayer from Kampala. 👏`,
+    quick_replies: ['Visit oddshoes.dev', 'Book a call', 'What happens next?'],
     stage: 'complete',
     action: 'brief_complete',
   },
 
   discovery_call_info: {
-    message: `Short and focused — 20 to 30 minutes. We'll dig into the problem, what you've tried or considered, who it's for, and what success looks like. By the end we'll have a clear picture to scope from.\n\nNo hard sell, no homework. Just a real conversation.\n\nWant to set one up?`,
-    quick_replies: ['Yes, let\'s book it', 'Drop my email first'],
+    message: `Quick and focused — 20 to 30 minutes. We dig into the problem, who it's for, what you've tried, and what success looks like.\n\nFor most founders we'd recommend starting with the Project Planner first (oddshoes.dev/planner) — it helps us come to the call prepared so you get more out of it.\n\nOr book directly: calendly.com/builtbyoddshoes\n\nNo hard sell. No homework. Just a real conversation.`,
+    quick_replies: ['Launch Project Planner', 'Book a call', 'Drop my email first'],
     stage: 'email_capture',
     action: 'request_email',
   },
@@ -300,16 +305,16 @@ const RESPONSES = {
 
   // ── FAQ: Team ────────────────────────────────────────────────────────────
   team: {
-    message: `Small and senior — intentionally.\n\nYou get a tight team of experienced engineers and designers. No junior developers learning on your project. No bloated teams burning your budget on coordination.\n\nEvery project has a dedicated lead who's your main point of contact — someone who knows the codebase inside out from day one.\n\nNo offshore handoffs. No outsourcing. The people you talk to are the people who build it.`,
-    quick_replies: ['How many people on a project?', 'Do you have dedicated project managers?', 'Start a project'],
+    message: `Small and senior — based in Kampala, Uganda. Average age: 27.\n\n• **Obed Edom Mugisha** — Team Lead, Asst. Pastor, Lead Guitarist\n• **Edwin Nahabwe** — Full Stack Dev, Lead Guitarist, Youth Pastor\n• **Daniel Lunyelele** — Back-end & Systems Engineer, Artist\n• **Ian Abenaitwe** — AI & Agentic AI Engineer\n• **Opakrwoth Jonathan** — Motion Graphics, AI Content Creator\n\nWorshippers and musicians who happen to be engineers. Every sprint starts with prayer. No outsourcing — the people you talk to are the people who build it.`,
+    quick_replies: ['What services do you offer?', 'See your work', 'Start a project'],
     stage: 'discovery',
     action: null,
   },
 
   // ── FAQ: Remote / Location ───────────────────────────────────────────────
   remote: {
-    message: `Fully remote — and it's never slowed us down.\n\nWe work with clients globally. Async-first communication, with video check-ins at the right moments. We're flexible on time zones.\n\nIf you're in a region that needs in-person work, let's talk about it — we'll figure out what makes sense.`,
-    quick_replies: ['I\'m in the US', 'I\'m in Europe', 'I\'m elsewhere', 'Let\'s talk project details'],
+    message: `We're based in Kampala, Uganda — and proudly so. Fiercely Pan-African, globally minded.\n\nWe work with clients worldwide. Async-first communication, with video check-ins at the right moments. Time zones haven't slowed us down yet.\n\nContact us on WhatsApp at +31 97 010 209 759 or book a call at calendly.com/builtbyoddshoes.`,
+    quick_replies: ['Book a call', 'Start on the Project Planner', 'Tell me about your services'],
     stage: 'discovery',
     action: null,
   },
@@ -348,8 +353,8 @@ const RESPONSES = {
 
   // ── FAQ: MVP / Startup ───────────────────────────────────────────────────
   mvp: {
-    message: `MVPs are a specialty. We've helped a lot of founders go from idea to launched — fast.\n\nThe key is ruthless scope discipline. An MVP should answer one question: does this solve the problem for real users? We help you define that minimum, build it tight, and ship it before you've over-engineered something nobody's validated yet.\n\nTypical MVP timeline: 6–12 weeks. Typical budget: $15–40k depending on complexity.\n\nHow developed is the idea right now?`,
-    quick_replies: ['Just an idea', 'I have wireframes/specs', 'I have a technical co-founder', 'I\'ve already built a bit'],
+    message: `MVPs are our specialty — it's what Genesis Build was designed for.\n\n**5 days. One feature. Production-ready. Launched Friday.**\n\nThe key is ruthless scope discipline. Lock the scope on Day 1, ship by Friday. 100+ MVPs shipped. One client used their Genesis Build to secure a $250K seed round.\n\nAre you pre-revenue with one clear feature to test?`,
+    quick_replies: ['Yes — tell me about Genesis Build', 'I have wireframes already', 'I need more than one feature'],
     stage: 'scoping',
     action: null,
     brief_update: { project_type: 'MVP / Startup' },
@@ -381,10 +386,43 @@ const RESPONSES = {
 
   // ── FAQ: How to get started ──────────────────────────────────────────────
   getStarted: {
-    message: `Simplest path: drop your email and we'll reach out to set up a discovery call.\n\nThat call is free, no commitment, and usually 20–30 minutes. We'll figure out together whether we're the right fit — and if we are, you'll get a full proposal and scope within a week.\n\nReady?`,
-    quick_replies: ['Yes — take my email', 'Tell me more about the call first'],
+    message: `Best first step: launch the Project Planner at oddshoes.dev/planner.\n\nIt takes 5–10 minutes to share your vision and budget. The team reviews it and comes back with a proposal — no obligation, no hard sell.\n\nAlternatively: book a call directly at calendly.com/builtbyoddshoes or email buildit@oddshoes.dev.\n\nReady?`,
+    quick_replies: ['Launch Project Planner', 'Book a call', 'Drop my email here'],
     stage: 'email_capture',
     action: 'request_email',
+  },
+
+  // ── Genesis Build ──────────────────────────────────────────────
+  genesisbuild: {
+    message: `Genesis Build is the 5-day MVP for pre-revenue founders.\n\n**What you get:**\n• Single core feature, production-ready\n• User authentication + database\n• Clean React interface (mobile-responsive)\n• Deployed to production on Day 5\n• Simple landing page + team walkthrough\n• 30-day bug fixes included\n\n**Stack:** Django/Laravel/FastAPI + React + PostgreSQL/MySQL. Optional CMS (Directus or Strapi).\n\n**Day 1:** Vision Lock — 2hr strategy call, scope locked, no feature creep.\n**Days 2–4:** Build.\n**Day 5:** Launched.\n\n**For:** Pre-revenue Christian founders with one clear core feature, ready to start Monday and launch Friday.\n**Not for:** Multi-sided marketplaces, complex payment flows, or people still figuring out the idea.\n\nInterested? Start the Project Planner at oddshoes.dev/planner`,
+    quick_replies: ['I\'m pre-revenue', 'Launch Project Planner', 'What about Kingdom Builder?', 'How much does it cost?'],
+    stage: 'scoping',
+    action: null,
+    brief_update: { project_type: 'MVP / Startup' },
+  },
+
+  // ── Kingdom Builder ──────────────────────────────────────────
+  kingdombuilder: {
+    message: `Kingdom Builder is the complete dev team for founders ready to scale.\n\n**What you get:**\n• Complete product (3–5 features)\n• Full brand & identity system\n• 14-day intensive build sprint\n• Stripe/M-Pesa payment integration\n• OpenClaw AI deployment + 2–3 custom skills\n• Admin dashboard (Directus/Strapi)\n• 6 months fractional CTO support (2 calls/month, 48hr bug fixes, 10 design hours/month)\n\n**Stack:** Django/Laravel/FastAPI + React or React Native + PostgreSQL/MySQL.\n\n**Limited to 3 projects per month.**\n\n**For:** Post-revenue founders generating revenue or with committed customers, needing 3–5 features and ongoing support.\n**Not for:** Idea-stage founders (start with Genesis Build), teams with a full-time CTO.\n\nProject Planner: oddshoes.dev/planner`,
+    quick_replies: ['I\'m post-revenue', 'Launch Project Planner', 'What about Genesis Build?', 'Tell me about AI automation'],
+    stage: 'scoping',
+    action: null,
+  },
+
+  // ── Give Him 50 / Faith ───────────────────────────────────────
+  givehim50: {
+    message: `Give Him 50 is our commitment to Kingdom generosity.\n\nWe give 50% of our profits to Kingdom work — missionaries, church plants, and ministry across East Africa. Not because we have to. Because we get to.\n\nIn 2024, Give Him 50 helped plant the first church through Odd Shoes profits. In 2025, it supported 5 missionaries and 3 church plants.\n\nWe build for Christian founders specifically because we believe business can be a vehicle for Kingdom impact — every product we ship carries that conviction.\n\nLearn more: oddshoes.dev/give-him-50`,
+    quick_replies: ['Tell me about your services', 'I want to build with you', 'Who is the team?'],
+    stage: 'discovery',
+    action: null,
+  },
+
+  // ── Billy Pods ─────────────────────────────────────────────────
+  billypods: {
+    message: `Billy Pods are vetted intern teams you can deploy for your own projects.\n\nEach Pod is 1–3 vetted interns plus a coordinator — ready to help your team ship faster.\n\nRequest a Pod at: oddshoes.dev/services/billy-pods`,
+    quick_replies: ['Request a Pod', 'Tell me about other services', 'I\'d rather you build it'],
+    stage: 'discovery',
+    action: null,
   },
 
   // ── FAQ: Timeline ────────────────────────────────────────────────────────
@@ -432,6 +470,31 @@ export function getBotResponse(userText, currentStage, currentBrief, messageCoun
   // ── About ─────────────────────────────────────────────────────────────────
   else if (isAbout(t)) {
     response = RESPONSES.about
+  }
+
+  // ── Give Him 50 / Faith ───────────────────────────────────────────────────
+  else if (isGiveHim50(t)) {
+    response = RESPONSES.givehim50
+  }
+
+  // ── Genesis Build ─────────────────────────────────────────────────────────
+  else if (isGenesis(t)) {
+    response = RESPONSES.genesisbuild
+  }
+
+  // ── Kingdom Builder ───────────────────────────────────────────────────────
+  else if (isKingdom(t)) {
+    response = RESPONSES.kingdombuilder
+  }
+
+  // ── Billy Pods ────────────────────────────────────────────────────────────
+  else if (isBillyPods(t)) {
+    response = RESPONSES.billypods
+  }
+
+  // ── Project Planner ───────────────────────────────────────────────────────
+  else if (isPlanner(t)) {
+    response = RESPONSES.getStarted
   }
 
   // ── How to get started ────────────────────────────────────────────────────

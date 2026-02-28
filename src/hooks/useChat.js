@@ -181,7 +181,7 @@ export function useChat() {
 
     appendMessage(
       'assistant',
-      `You're in. Someone from the Odd Shoes team will reach out within 24 hours.\n\nIn the meantime — see what we've been building at oddshoes.dev.`
+      `You're in. Someone from the Odd Shoes team will reach out within 24 hours.\n\nIn the meantime — explore the portfolio at oddshoes.dev/work or book a call directly at calendly.com/builtbyoddshoes. Built with prayer from Kampala. 👏`
     )
 
     updateStage(STAGES.COMPLETE)
