@@ -73,8 +73,8 @@ export default function App() {
         </div>
       </div>
 
-      {/* Arrow hint */}
-      <div className="fixed bottom-24 right-8 z-40 flex flex-col items-center gap-1 pointer-events-none">
+      {/* Arrow hint — hidden on mobile so it doesn't overlap launcher */}
+      <div className="hidden sm:flex fixed bottom-24 right-8 z-40 flex-col items-center gap-1 pointer-events-none">
         <p
           className="text-[11px] font-medium tracking-wide"
           style={{ color: 'rgba(200,255,87,0.5)', writingMode: 'horizontal-tb' }}

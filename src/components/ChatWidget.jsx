@@ -159,9 +159,9 @@ export default function ChatWidget({ embedded = false }) {
     <div
       className="flex flex-col bg-os-dark border border-os-border rounded-2xl overflow-hidden chat-widget"
       style={{
-        width: embedded ? '100%' : 380,
-        height: embedded ? '100%' : 600,
-        maxHeight: embedded ? '100%' : '85vh',
+        width: embedded ? '100%' : 'min(380px, calc(100vw - 2rem))',
+        height: embedded ? '100%' : 'min(600px, calc(100svh - 5rem))',
+        maxHeight: embedded ? '100%' : '90svh',
         boxShadow: embedded ? 'none' : '0 25px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)',
       }}
     >
@@ -320,7 +320,7 @@ export default function ChatWidget({ embedded = false }) {
           </div>
         </div>
 
-        {/* Brief Card sidebar — appears when brief data exists */}
+        {/* Brief Card sidebar — appears when brief data exists, hidden on very small screens */}
         <AnimatePresence>
           {showBriefCard && (
             <motion.div
@@ -328,7 +328,7 @@ export default function ChatWidget({ embedded = false }) {
               animate={{ width: 160, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ type: 'spring', damping: 24, stiffness: 240 }}
-              className="border-l border-os-border overflow-hidden flex-shrink-0"
+              className="hidden xs:block border-l border-os-border overflow-hidden flex-shrink-0"
               style={{ background: 'rgba(0,0,0,0.3)' }}
             >
               <div className="p-3 h-full overflow-y-auto">
@@ -350,7 +350,7 @@ export default function ChatWidget({ embedded = false }) {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3">
       <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div

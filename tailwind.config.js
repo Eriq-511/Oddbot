@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '400px',
+      },
       colors: {
         // Odd Shoes Brand Palette
         'os-black': '#0A0A0A',
