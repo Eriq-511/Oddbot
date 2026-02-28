@@ -147,7 +147,21 @@ export function useChat() {
     appendMessage('user', email)
     setIsTyping(true)
 
-    // Store in localStorage so it persists in the session
+    // Save lead to Supabase via serverless function (primary)
+    try {
+      await fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.toLowerCase(),
+          brief: { ...briefRef.current },
+        }),
+      })
+    } catch (_) {
+      // API unavailable — fall through to localStorage backup
+    }
+
+    // localStorage backup — always runs so leads are never lost
     try {
       const existing = JSON.parse(localStorage.getItem('oddbot_leads') || '[]')
       const entry = {
