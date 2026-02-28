@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: #0A0A0A;
+    color: #F5F5F5;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2A2A2A;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3A3A3A;
+  }
+}
+
+@layer components {
+  .chat-widget {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Smooth text rendering for messages */
+  .message-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.6;
+  }
+
+  /* Brand gradient glow */
+  .lime-glow {
+    text-shadow: 0 0 20px rgba(200, 255, 87, 0.4);
+  }
+
+  /* Brief card fill animation */
+  .brief-fill {
+    animation: briefFill 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes briefFill {
+    from {
+      opacity: 0;
+      height: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      height: auto;
+      transform: translateY(0);
+    }
+  }
+
+  /* Typing cursor blink */
+  .cursor-blink::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: #C8FF57;
+    margin-left: 1px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Widget launch button pulse */
+  .launch-pulse {
+    animation: launchPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes launchPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(200, 255, 87, 0.3); }
+    50% { box-shadow: 0 0 0 12px rgba(200, 255, 87, 0); }
+  }
+}
+
+/* Chat demo page background */
+.demo-bg {
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(200, 255, 87, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 45, 120, 0.04) 0%, transparent 60%),
+    #0A0A0A;
+  min-height: 100vh;
+}
